@@ -1,0 +1,57 @@
+let ctx = document.getElementById('myChart')
+
+const plugin = {
+    id: 'customCanvasBackgroundColor',
+    beforeDraw: (chart, args, options) => {
+      const {ctx} = chart;
+      ctx.save();
+      ctx.globalCompositeOperation = 'destination-over';
+      ctx.fillStyle = options.color || '#fff';
+      ctx.fillRect(0, 0, chart.width, chart.height);
+      ctx.restore();
+    }
+  };
+
+// const stars = [135850, 52122, 148825, 16939, 9763]
+// const stars = [115850, 152122, 108825, 34939, 39763]
+// const frameworks = ['React', 'Angular', 'Vue', 'Hyperapp', 'Omi']
+// const countries = ['USA', 'Canada', 'UK', 'China', 'Japan']
+// const barColors = ['rgba(12, 36, 97, 0.5)', 'rgba(229, 80, 57, 0.5)', 'rgba(74, 105, 189, 0.5)', 'rgba(96, 163, 188, 0.5)', 'rgba(120, 224, 143, 0.5)', 'rgba(0, 0, 0, 0.5)']
+// const borderColors = ['rgba(12, 36, 97, 1)', 'rgba(229, 80, 57, 1)', 'rgba(74, 105, 189, 1)', 'rgba(96, 163, 188, 1)', 'rgba(120, 224, 143, 1)', 'rgba(0, 0, 0, 1)']
+
+const stars = [115850, 152122, 108825, 34939, 39763]
+const dwnLoads = [215850, 192122, 168825, 21939, 13763]
+const frameworks = ['React', 'Angular', 'Vue', 'Hyperapp', 'Omi']
+const barColors = ['rgba(12, 36, 97, 0.5)', 'rgba(229, 80, 57, 0.5)', 'rgba(74, 105, 189, 0.5)', 'rgba(96, 163, 188, 0.5)', 'rgba(120, 224, 143, 0.5)', 'rgba(0, 0, 0, 0.5)']
+const borderColors = ['rgba(12, 36, 97, 1)', 'rgba(229, 80, 57, 1)', 'rgba(74, 105, 189, 1)', 'rgba(96, 163, 188, 1)', 'rgba(120, 224, 143, 1)', 'rgba(0, 0, 0, 1)']
+
+
+let myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: frameworks,         
+        datasets: [{
+            label:'GitHub Stars',
+            data: stars,
+            backgroundColor: '#333',
+            borderColor: '#000',
+            borderWidth: 0.5,
+        },{
+            label:'Downloads',
+            data: dwnLoads,
+            backgroundColor: '#eee',
+            borderColor: '#000',
+            borderWidth: 0.5,
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+          customCanvasBackgroundColor: {
+            color: '#fff',
+          }
+        }
+      },
+      plugins: [plugin],
+ }
+)
